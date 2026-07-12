@@ -1,26 +1,120 @@
 @import "tailwindcss";
 
+@theme {
+  --color-brand-pink-50: var(--brand-pink-50);
+  --color-brand-pink-100: var(--brand-pink-100);
+  --color-brand-pink-200: var(--brand-pink-200);
+  --color-brand-pink-500: var(--brand-pink-500);
+  --color-brand-pink-600: var(--brand-pink-600);
+  --color-brand-pink-700: var(--brand-pink-700);
+
+  --color-brand-green-50: var(--brand-green-50);
+  --color-brand-green-100: var(--brand-green-100);
+  --color-brand-green-200: var(--brand-green-200);
+  --color-brand-green-500: var(--brand-green-500);
+  --color-brand-green-600: var(--brand-green-600);
+  --color-brand-green-700: var(--brand-green-700);
+
+  --color-app-bg: var(--app-bg);
+  --color-card-bg: var(--card-bg);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-border-color: var(--border-color);
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  color-scheme: light;
+
+  /* Pink (Rose) shades */
+  --brand-pink-50: #fff1f2;
+  --brand-pink-100: #ffe4e6;
+  --brand-pink-200: #fecdd3;
+  --brand-pink-500: #f43f5e;
+  --brand-pink-600: #e11d48;
+  --brand-pink-700: #be123c;
+
+  /* Green (Emerald) shades */
+  --brand-green-50: #f0fdf4;
+  --brand-green-100: #dcfce7;
+  --brand-green-200: #bbf7d0;
+  --brand-green-500: #10b981;
+  --brand-green-600: #059669;
+  --brand-green-700: #047857;
+
+  /* Theme Layout */
+  --app-bg: #fafaf9; /* Warm stone-50 */
+  --card-bg: #ffffff;
+  --text-primary: #1c1917; /* Stone-900 */
+  --text-secondary: #57534e; /* Stone-600 */
+  --border-color: #e7e5e4; /* Stone-200 */
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+.dark {
+  color-scheme: dark;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  /* Pink shades in dark mode */
+  --brand-pink-50: #1f1113;
+  --brand-pink-100: #3b141a;
+  --brand-pink-200: #4c111e;
+  --brand-pink-500: #fb7185;
+  --brand-pink-600: #f43f5e;
+  --brand-pink-700: #fda4af;
+
+  /* Green shades in dark mode */
+  --brand-green-50: #062f1d;
+  --brand-green-100: #044b29;
+  --brand-green-200: #054f2a;
+  --brand-green-500: #34d399;
+  --brand-green-600: #10b981;
+  --brand-green-700: #6ee7b7;
+
+  /* Theme Layout in dark mode */
+  --app-bg: #0c0a09; /* Stone-950 */
+  --card-bg: #1c1917; /* Stone-900 */
+  --text-primary: #f5f5f4; /* Stone-100 */
+  --text-secondary: #a8a29e; /* Stone-400 */
+  --border-color: #2e2a24; /* Darker border */
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--app-bg);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Nice scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-secondary);
+}
+
+/* Animations */
+@keyframes checkPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.9); }
+  100% { transform: scale(1); }
+}
+
+.animate-check {
+  animation: checkPop 0.2s ease-in-out;
+}
+
+/* Fix dropdown options clashing with system dark theme by dynamically setting card bg and text primary colors */
+select option {
+  background-color: var(--card-bg) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Force text-white to remain white in dark mode and all conditions */
+.text-white {
+  color: #ffffff !important;
 }
